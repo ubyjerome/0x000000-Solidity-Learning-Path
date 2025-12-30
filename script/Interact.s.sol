@@ -1,0 +1,24 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+import "forge-std/Script.sol";
+import "../src/Example.sol";
+
+contract InteractExample is Script {
+    function run() external {
+        vm.startBroadcast(0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80);
+
+        // Attach to deployed contract
+        Example example = Example(0x5FbDB2315678afecb367f032d93F642f64180aa3);
+
+        // Read value
+        uint8 current = example.value();
+        console.log("Current value:", current);
+
+        // Update value
+        example.setValue(99);
+        console.log("Value updated!");
+
+        vm.stopBroadcast();
+    }
+}
