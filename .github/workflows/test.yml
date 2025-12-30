@@ -12,7 +12,7 @@ env:
 
 jobs:
   check:
-    name: Foundry project
+    name: 0x000000-Solidity-Learning-Path
     runs-on: ubuntu-latest
     permissions:
       contents: read
