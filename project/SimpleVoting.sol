@@ -7,8 +7,7 @@ contract SimpleVoting {
         uint voteCount;
     }
 
-    address public admin = 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266;
-
+    address public admin;
     mapping(address => bool) public isVoter;
     mapping(address => bool) public hasVoted;
     address[] public voterList;
@@ -24,7 +23,12 @@ contract SimpleVoting {
         admin = msg.sender;
     }
 
-
+    function isAdmin(address user) external view returns (bool) {
+        if (msg.sender == admin) {
+            return true;
+        }
+        return user == admin;
+    }
 
     function addEligibleAddressForVote(address voter) external onlyAdmin {
         require(voter != address(0), "Invalid address");
@@ -47,12 +51,21 @@ contract SimpleVoting {
         return voterList;
     }
 
-    // add candidate
-    // vote for candidate
-    // view results
+    function addCandidate(string calldata name) external onlyAdmin {
+        require(bytes(name).length > 0, "Name cannot be empty");
+        candidates.push(Candidate({name: name, voteCount: 0}));
+    }
+
+    function viewResults() external view returns (Candidate[] memory) {
+        return candidates;
+    }
+
+    function vote(uint candidateIndex) external {
+        require(isVoter[msg.sender], "Not eligible to vote");
+        require(!hasVoted[msg.sender], "Already voted");
+        require(candidateIndex < candidates.length, "Invalid candidate");
+
+        candidates[candidateIndex].voteCount += 1;
+        hasVoted[msg.sender] = true;
+    }
 }
-
-
-
-
-

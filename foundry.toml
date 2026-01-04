@@ -2,11 +2,10 @@
 src = "src"
 out = "out"
 libs = ["lib"]
-sender = "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
 
 [rpc_endpoints]
 localhost = "http://127.0.0.1:8545"
-goerli    = "https://eth-goerli.g.alchemy.com/v2/YOUR_KEY"
+testnet    = "https://ethereum-sepolia-rpc.publicnode.com"
 mainnet   = "https://eth-mainnet.g.alchemy.com/v2/YOUR_KEY"
 
 

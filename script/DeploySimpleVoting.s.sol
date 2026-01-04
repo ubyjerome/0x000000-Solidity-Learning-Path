@@ -2,7 +2,7 @@
 pragma solidity ^0.8.20;
 
 import {Script} from "forge-std/Script.sol";
-import {SimpleVoting} from "../project/Simple-Voting.sol";
+import {SimpleVoting} from "../project/SimpleVoting.sol";
 
 contract DeploySimpleVoting is Script {
     function run() external {
